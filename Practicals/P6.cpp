@@ -6,81 +6,55 @@ The class should include member functions
  Use copy constructors to initialize the 
  member variables.
  */
-#include <iostream>
+#include<iostream>
 using namespace std;
-
-struct complex
-{
-    int real;
-    int imag;
+class Complex{
+private:
+    int real,imag;
+public:
+    Complex(){
+        real=1;
+        imag=1;
+    }
+   Complex(int r, int i){
+    real=r;
+    imag=i;
+    }
+    Complex(Complex &c){
+        real=c.real;
+        imag=c.imag;
+    }
+    void get_data();
+    Complex operator+(Complex);
+	Complex operator-(Complex);
 };
-
-complex complex_set(int a , int b);
-complex operator+(complex a,complex b);
-complex operator-(complex a,complex b);
-complex operator*(complex c1, complex c2)
-{
-    complex temp;
-    temp.real=c1.real+c2.real;
-    temp.imag=c1.imag+c2.imag;
-    return temp;
-    
+void Complex::get_data(){
+        cout<<real<<" + "<<imag<<" i ";
 }
-void complex_print(complex);
-
-
+Complex Complex::operator+(Complex c1){
+    Complex temp;
+    temp.real=real+c1.real;
+    temp.imag=imag+c1.imag;
+    return temp;
+}
+Complex Complex::operator-(Complex c1){
+    Complex temp;
+    temp.real=real-c1.real;
+    temp.imag=imag-c1.imag;
+    return temp;
+}
 int main()
 {
-    complex c1,c2,c3,c4,c5;
-    c1=complex_set(2,3);
-    complex_print(c1);
-    c2=complex_set(3,4);
-    complex_print(c2);
-    cout<<endl<<"Addition of two complex numbers"<<endl;
-    //c3=add_complex(c1,c2);
-    c3=c1+c2;
-    c4=c1-c2;
-    c5=c1*c2;
-    complex_print(c3);
-    complex_print(c4);
-    complex_print(c5);
-}
-
-complex complex_set(int a, int b)
-{
-    complex temp;
-    temp.real=a;
-    temp.imag=b;
-    return temp;
-}
-
-void complex_print(complex c)
-{
-    cout<<endl<<c.real<<"+"<<c.imag<<"i";
-}
-
-complex operator+(complex c1, complex c2)
-{
-    complex temp;
-    temp.real=c1.real+c2.real;
-    temp.imag=c1.imag+c2.imag;
-    return temp;
-    
-}
-complex operator-(complex c1, complex c2)
-{
-    complex temp;
-    temp.real=c1.real-c2.real;
-    temp.imag=c1.imag-c2.imag;
-    return temp;
-    
-}
-complex operator*(complex c1, complex c2)
-{
-    complex temp;
-    temp.real=(c1.real*c2.real)-(c1.imag+c2.imag);
-    temp.imag=(c1.real*c2.imag)+(c1.imag+c2.real);
-    return temp;
-    
-}
- 
+    Complex c1(3,7),c2(c1),c3,temp;
+    cout<<endl<<"c2 is : ";
+    c2.get_data();
+    cout<<endl<<"c3 is : ";
+    c3.get_data();
+    cout<<endl<<"c2 + c3 = ";
+    temp=c2+c3;
+    temp.get_data();
+    cout<<endl<<"c2 - c3 = ";
+    temp=c2-c3;
+    temp.get_data();
+    return 0;
+} 
